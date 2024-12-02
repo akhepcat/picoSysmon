@@ -1,10 +1,12 @@
 import gc
 import os
 import network
+import re
+import requests
 import socket
+
 from time import sleep
 from machine import ADC, Pin, Timer, freq, reset
-import requests
 
 class picoSysmon:
     """ This is the meat and the potatoes.
@@ -33,6 +35,13 @@ class picoSysmon:
         self.debug = debug
         self.wlan = network.WLAN(network.STA_IF)
 
+        if re.search("\{MAC\}", hostname):
+            MAC = self.wlan.config('mac').hex(":")
+            MAC = MAC.replace(":","")
+            MAC = MAC[6:]
+            print(f"updating hostname with mac: {MAC}")
+            self.HOSTNAME = self.HOSTNAME.replace("{MAC}", MAC)
+
         if (token is None) or (token == ""):
             self.headers = {
                 "Content-Type": "application/octet-stream",
@@ -46,7 +55,8 @@ class picoSysmon:
         # Now set global vars
         # configure the network data appropriately the first time
         network.country(country)
-        network.hostname(hostname)
+        network.hostname(self.HOSTNAME)
+        if self.debug: print(f"My hostname is: {self.HOSTNAME}")
 
         # Last, set non-user self vars
         self.temp_sensor = ADC(ADC.CORE_TEMP)	# more portable across microcontrollers
@@ -56,7 +66,6 @@ class picoSysmon:
 
         self.led = Pin("LED", Pin.OUT)
         self.blink = Timer()
-        
 
 
 

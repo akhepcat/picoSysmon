@@ -1,0 +1,1042 @@
+updating mem info
+memory is using 176352 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27044.4
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=176352
+memory,host=pico2w freemem=275488
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27044.4C
+updating mem info
+memory is using 181456 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27044.4
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=181456
+memory,host=pico2w freemem=270384
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 186560 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=186560
+memory,host=pico2w freemem=265280
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 191680 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=191680
+memory,host=pico2w freemem=260160
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 196800 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=196800
+memory,host=pico2w freemem=255040
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 201920 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=201920
+memory,host=pico2w freemem=249920
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 207040 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=207040
+memory,host=pico2w freemem=244800
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 212160 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=212160
+memory,host=pico2w freemem=239680
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 217280 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=217280
+memory,host=pico2w freemem=234560
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 222400 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=222400
+memory,host=pico2w freemem=229440
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 227520 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=227520
+memory,host=pico2w freemem=224320
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 232640 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=232640
+memory,host=pico2w freemem=219200
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 237760 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=237760
+memory,host=pico2w freemem=214080
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 242880 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=242880
+memory,host=pico2w freemem=208960
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 248000 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=248000
+memory,host=pico2w freemem=203840
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 253120 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=253120
+memory,host=pico2w freemem=198720
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 258240 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=258240
+memory,host=pico2w freemem=193600
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 263360 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=263360
+memory,host=pico2w freemem=188480
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 268480 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=268480
+memory,host=pico2w freemem=183360
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 273600 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=273600
+memory,host=pico2w freemem=178240
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 278720 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=278720
+memory,host=pico2w freemem=173120
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 283840 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=283840
+memory,host=pico2w freemem=168000
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 288960 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=288960
+memory,host=pico2w freemem=162880
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 294080 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=294080
+memory,host=pico2w freemem=157760
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 299200 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=299200
+memory,host=pico2w freemem=152640
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 304320 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=304320
+memory,host=pico2w freemem=147520
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 309440 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=309440
+memory,host=pico2w freemem=142400
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 314560 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=314560
+memory,host=pico2w freemem=137280
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 319680 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=319680
+memory,host=pico2w freemem=132160
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27044.4C
+updating mem info
+memory is using 324800 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27044.4
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=324800
+memory,host=pico2w freemem=127040
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 329904 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=329904
+memory,host=pico2w freemem=121936
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 335024 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=335024
+memory,host=pico2w freemem=116816
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 340144 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=340144
+memory,host=pico2w freemem=111696
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 345264 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=345264
+memory,host=pico2w freemem=106576
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 350384 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=350384
+memory,host=pico2w freemem=101456
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 355504 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=355504
+memory,host=pico2w freemem=96336
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 360608 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=360608
+memory,host=pico2w freemem=91232
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 365712 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=365712
+memory,host=pico2w freemem=86128
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 370816 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=370816
+memory,host=pico2w freemem=81024
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 375920 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=375920
+memory,host=pico2w freemem=75920
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 381024 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=381024
+memory,host=pico2w freemem=70816
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 386128 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=386128
+memory,host=pico2w freemem=65712
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 391232 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=391232
+memory,host=pico2w freemem=60608
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27980.69C
+updating mem info
+memory is using 396336 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27980.69
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=396336
+memory,host=pico2w freemem=55504
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 401440 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=401440
+memory,host=pico2w freemem=50400
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 406544 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=406544
+memory,host=pico2w freemem=45296
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 411648 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=411648
+memory,host=pico2w freemem=40192
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 416752 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=416752
+memory,host=pico2w freemem=35088
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27980.69C
+updating mem info
+memory is using 421856 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27980.69
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=421856
+memory,host=pico2w freemem=29984
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27980.69C
+updating mem info
+memory is using 426960 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27980.69
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=426960
+memory,host=pico2w freemem=24880
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27980.69C
+updating mem info
+memory is using 432064 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27980.69
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=432064
+memory,host=pico2w freemem=19776
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 437168 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=437168
+memory,host=pico2w freemem=14672
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+Data posted successfully
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 442272 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=442272
+memory,host=pico2w freemem=9568
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+timeout #1 sending data to influxdb
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27512.54C
+updating mem info
+memory is using 445824 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27512.54
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=445824
+memory,host=pico2w freemem=6016
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+timeout #2 sending data to influxdb
+Deactivating wifi
+sleeping for 60 seconds
+Connecting to wifi
+Connected on 192.168.1.183
+updating temp info
+Read temp: 27980.69C
+updating mem info
+memory is using 449376 bytes out of 451840
+updating disk info
+disk is using 49152 bytes out of 2097152
+posting data to influxdb...
+thermals,host=pico2w,zone=cpu temp=27980.69
+memory,host=pico2w totalmem=451840
+memory,host=pico2w usedmem=449376
+memory,host=pico2w freemem=2464
+disk_usage,host=pico2w,drive=flash,mount=/ size=2097152
+disk_usage,host=pico2w,drive=flash,mount=/ free=49152
+
+timeout #3 sending data to influxdb
+Deactivating wifi
+sleeping for 60 seconds
+

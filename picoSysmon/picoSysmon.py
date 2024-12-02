@@ -1,0 +1,189 @@
+import gc
+import os
+import network
+import socket
+from time import sleep
+from machine import ADC, Pin, Timer, freq, reset
+import requests
+
+class picoSysmon:
+    """ This is the meat and the potatoes.
+
+        picoSysmon is a tiny implementation of the sysmon project to monitor server data
+
+        It currently supports CPU temp, storage space, and memory use.
+
+        Other trackable items may appear in the future
+     """
+
+    def __init__(self, 
+                debug: bool, 
+                ssid: str, 
+                psk: str, 
+                country: str, 
+                url: str, 
+                token: str, 
+                hostname: str
+                ) -> None:
+        # Set self vars from main first
+        self.SSID = ssid
+        self.PSK = psk
+        self.INFLUXURL = url
+        self.HOSTNAME = hostname
+        self.debug = debug
+
+        if (token is None) or (token == ""):
+            self.headers = {
+                "Content-Type": "application/octet-stream",
+            }
+        else:
+            self.headers = {
+                "Authorization": f"{token}",
+                "Content-Type": "application/octet-stream",
+            }
+
+        # Now set global vars
+        # configure the network data appropriately the first time
+        network.country(country)
+        network.hostname(hostname)
+
+        # Last, set non-user self vars
+        self.temp_sensor = ADC(ADC.CORE_TEMP)	# more portable across microcontrollers
+
+        self.ip = None
+        self.webtimeouts = 0
+
+        self.led = Pin("LED", Pin.OUT)
+        self.blink = Timer()
+        
+
+
+
+    def __blinken(self,timer):
+        self.led.toggle()
+
+
+    def __connect(self):
+        tries = 0
+        # Connect to the WLAN
+        wlan = network.WLAN(network.STA_IF)
+        while tries < 5:
+            sleeps = 0
+            wlan.active(True)
+            wlan.connect(self.SSID, self.PSK)
+            while sleeps < 5:
+                if wlan.isconnected() == True:
+                    self.ip = wlan.ifconfig()[0]
+                    print(f'Connected on {self.ip}')
+                    return wlan
+                sleeps += 1
+                sleep(1)
+#            wlan.disconnect()
+            wlan.active(False)
+            sleep(1)
+            tries += 1
+        # Can't get connected to the wifi after 5 attempts, so full reset
+        reset()
+                
+
+
+    def __post_data(self, data):
+        if self.debug: print("posting data to influxdb...")
+        if self.debug: print(data)
+        try:
+            response = requests.post(self.INFLUXURL, headers=self.headers, data=data, timeout=5)
+        except:
+            self.webtimeouts += 1
+            print(f"timeout #{self.webtimeouts} sending data to influxdb")
+            return(False)
+        if response.status_code == 204:
+            if self.debug: print("Data posted successfully")
+            # assume that a success resets things
+            self.webtimeouts = 0
+            ret = True
+        else:
+            print("Failed to post data:")
+            if self.debug:
+                print("Status Code:", response.status_code)
+                print("Response:", response.text)
+            ret = False
+        response.close()
+        return(ret)
+
+
+    def __update_mem(self):
+        if self.debug: print("updating mem info")
+        free = gc.mem_free()
+        used = gc.mem_alloc()
+        max = used + free
+        if self.debug: print(f"memory is using {used} bytes out of {max}")
+        data = f"memory,host={self.HOSTNAME} totalmem={max}\n" + f"memory,host={self.HOSTNAME} usedmem={used}\n" + f"memory,host={self.HOSTNAME} freemem={free}"
+        return(data)
+
+
+    def __update_disk(self):
+        if self.debug: print("updating disk info")
+        s = os.statvfs('//')
+        used = ( s[0]*s[3] )
+        max = 2097152    # 2mb on the pico2w
+        free = max - used
+        if self.debug: print(f"disk is using {free} bytes out of {max}")
+        data = f"disk_usage,host={self.HOSTNAME},drive=flash,mount=/ size={max}\n" + f"disk_usage,host={self.HOSTNAME},drive=flash,mount=/ free={free}"
+        return(data)
+
+
+    def __update_temp(self):
+        if self.debug: print("updating temp info")
+        # Read the raw ADC value
+        adc_value = self.temp_sensor.read_u16()
+        # Convert ADC value to voltage
+        voltage = adc_value * (3.3 / 65535.0)
+        # Temperature calculation based on sensor characteristics
+        temp = 27 - (voltage - 0.706) / 0.001721
+        temp = temp * 1000  # we scale in grafana
+        if self.debug: print(f"Read temp: {temp}C")
+        data = f"thermals,host={self.HOSTNAME},zone=cpu temp={temp}"
+        return(data)
+
+
+    def run(self):
+        try:
+            while True:
+                # Wifi Setup (each time!)
+                self.blink.init(freq=25, mode=Timer.PERIODIC, callback=self.__blinken)    # freq is events per second
+                if self.debug: print("Connecting to wifi")
+                NET = self.__connect()
+                sleep(2)		# let things stabilize
+                self.blink.deinit()
+
+                # Update influxDB
+                self.blink.init(freq=10, mode=Timer.PERIODIC, callback=self.__blinken)
+                temps = self.__update_temp()
+                mems = self.__update_mem()
+                disks = self.__update_disk()
+                mydata = temps + "\n" + mems + "\n" + disks + "\n"
+                self.__post_data(mydata)
+                # Make sure we don't have too many web timeouts in a row
+                # to work around a connect but with micropython
+                if self.webtimeouts > 3:
+                    reset()
+                sleep(2)		# might as well rest a bit here, too
+                self.blink.deinit()
+
+                # Kill the wifi, then sleep between loops
+                if self.debug: print("Deactivating wifi")
+                NET.disconnect()
+                NET.active(False)
+                self.blink.init(freq=1, mode=Timer.PERIODIC, callback=self.__blinken)
+                sleeps = ( 60 * 5 )
+                if self.debug:
+                    sleeps = 60
+                if self.debug: print(f"sleeping for {sleeps} seconds")
+                sleep(sleeps)
+                self.blink.deinit()
+
+        except KeyboardInterrupt:
+        #    reset()
+            print("I'm halting for you...")
+            return(0)
+

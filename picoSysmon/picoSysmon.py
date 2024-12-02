@@ -31,6 +31,7 @@ class picoSysmon:
         self.INFLUXURL = url
         self.HOSTNAME = hostname
         self.debug = debug
+        self.wlan = network.WLAN(network.STA_IF)
 
         if (token is None) or (token == ""):
             self.headers = {
@@ -66,20 +67,18 @@ class picoSysmon:
     def __connect(self):
         tries = 0
         # Connect to the WLAN
-        wlan = network.WLAN(network.STA_IF)
         while tries < 5:
             sleeps = 0
-            wlan.active(True)
-            wlan.connect(self.SSID, self.PSK)
+            self.wlan.active(True)
+            self.wlan.connect(self.SSID, self.PSK)
             while sleeps < 5:
-                if wlan.isconnected() == True:
-                    self.ip = wlan.ifconfig()[0]
+                if self.wlan.isconnected() == True:
+                    self.ip = self.wlan.ifconfig()[0]
                     print(f'Connected on {self.ip}')
-                    return wlan
+                    return self.wlan
                 sleeps += 1
                 sleep(1)
-#            wlan.disconnect()
-            wlan.active(False)
+            self.wlan.active(False)
             sleep(1)
             tries += 1
         # Can't get connected to the wifi after 5 attempts, so full reset
@@ -152,7 +151,7 @@ class picoSysmon:
                 # Wifi Setup (each time!)
                 self.blink.init(freq=25, mode=Timer.PERIODIC, callback=self.__blinken)    # freq is events per second
                 if self.debug: print("Connecting to wifi")
-                NET = self.__connect()
+                self.__connect()
                 sleep(2)		# let things stabilize
                 self.blink.deinit()
 
@@ -172,8 +171,8 @@ class picoSysmon:
 
                 # Kill the wifi, then sleep between loops
                 if self.debug: print("Deactivating wifi")
-                NET.disconnect()
-                NET.active(False)
+                self.wlan.disconnect()
+                self.wlan.active(False)
                 self.blink.init(freq=1, mode=Timer.PERIODIC, callback=self.__blinken)
                 sleeps = ( 60 * 5 )
                 if self.debug:

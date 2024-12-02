@@ -1,5 +1,5 @@
 #!/bin/python3
-import sys
+from sys import exit
 try:
     import secrets.CONFIG as CONFIG
 except:

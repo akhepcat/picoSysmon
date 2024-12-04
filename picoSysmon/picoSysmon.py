@@ -137,10 +137,11 @@ class picoSysmon:
     def __update_disk(self):
         if self.debug: print("updating disk info")
         s = os.statvfs('//')
-        used = ( s[0]*s[3] )
-        max = 2097152    # 2mb on the pico2w
-        free = max - used
-        if self.debug: print(f"disk is using {free} bytes out of {max}")
+        if self.debug: print(f"statvfs returns {s}")
+        max = ( s[0]*s[2] )
+        free = ( s[0]*s[3] )
+        used = max - free
+        if self.debug: print(f"disk is using {used} bytes out of {max}, with {free} remaining")
         data = f"disk_usage,host={self.HOSTNAME},drive=flash,mount=/ size={max}\n" + f"disk_usage,host={self.HOSTNAME},drive=flash,mount=/ free={free}"
         return(data)
 

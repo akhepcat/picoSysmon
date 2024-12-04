@@ -1,12 +1,22 @@
-import gc
-import os
-import network
-import re
-import requests
-import socket
+try: import gc
+except: print("Can't import gc")
+try: import os
+except: print("Can't import os")
+try: import network
+except: print("Can't import network")
+try: import re
+except: print("Can't import re")
+try: import requests
+except: print("Can't import requests")
+try: import socket
+except: print("Can't import socket")
 
-from time import sleep
-from machine import ADC, Pin, Timer, freq, reset
+try: from time import sleep
+except: print("Can't import time")
+
+try: from machine import ADC, Pin, Timer, freq, reset
+except: print("Can't import machine")
+
 
 class picoSysmon:
     """ This is the meat and the potatoes.

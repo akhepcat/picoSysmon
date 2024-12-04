@@ -35,7 +35,7 @@ class picoSysmon:
         self.debug = debug
         self.wlan = network.WLAN(network.STA_IF)
 
-        if re.search("\{MAC\}", hostname):
+        if re.search(r"\{MAC\}", hostname):
             MAC = self.wlan.config('mac').hex(":")
             MAC = MAC.replace(":","")
             MAC = MAC[6:]

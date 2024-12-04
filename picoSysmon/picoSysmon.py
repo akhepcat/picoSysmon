@@ -67,6 +67,11 @@ class picoSysmon:
         self.led = Pin("LED", Pin.OUT)
         self.blink = Timer()
 
+#        gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+#        gcthresh = gc.threshold()
+#        gc.enable()
+#        if self.debug: print(f"gc threshold: {gcthresh}  (-1 is disabled)")
+
 
 
     def __blinken(self,timer):
@@ -187,6 +192,7 @@ class picoSysmon:
                 if self.debug:
                     sleeps = 60
                 if self.debug: print(f"sleeping for {sleeps} seconds")
+                gc.collect()
                 sleep(sleeps)
                 self.blink.deinit()
 

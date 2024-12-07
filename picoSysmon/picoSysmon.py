@@ -11,7 +11,7 @@ except: print("Can't import requests")
 try: import socket
 except: print("Can't import socket")
 
-try: from time import sleep
+try: from time import sleep, mktime, gmtime
 except: print("Can't import time")
 
 try: from machine import ADC, Pin, Timer, freq, reset, mem32
@@ -43,6 +43,7 @@ class picoSysmon:
         self.INFLUXURL = url
         self.HOSTNAME = hostname
         self.wlan = network.WLAN(network.STA_IF)
+        self.startup = mktime(gmtime())
 
         # Always debug when the USB serial console is detected
         if self.__usbDetect():
@@ -73,19 +74,13 @@ class picoSysmon:
         if self.debug: print(f"My hostname is: {self.HOSTNAME}")
 
         # Last, set non-user self vars
-        self.temp_sensor = ADC(ADC.CORE_TEMP)	# more portable across microcontrollers
+        self.temp_sensor = ADC(ADC.CORE_TEMP)    # more portable across microcontrollers
 
         self.ip = None
         self.webtimeouts = 0
 
         self.led = Pin("LED", Pin.OUT)
         self.blink = Timer()
-
-#        gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
-#        gcthresh = gc.threshold()
-#        gc.enable()
-#        if self.debug: print(f"gc threshold: {gcthresh}  (-1 is disabled)")
-
 
 
     def __usbDetect(self):
@@ -186,6 +181,14 @@ class picoSysmon:
         return(data)
 
 
+    def __update_uptime(self):
+        if self.debug: print("updating uptime info")
+        self.uptime = mktime( gmtime() ) - self.startup
+        if self.debug: print(f"uptime: {self.uptime} seconds")
+        data = f"system,host={self.HOSTNAME} uptime={self.uptime}"
+        return(data)
+
+
     def run(self):
         try:
             while True:
@@ -202,6 +205,8 @@ class picoSysmon:
                 mems = self.__update_mem()
                 disks = self.__update_disk()
                 mydata = temps + "\n" + mems + "\n" + disks + "\n"
+                uptime = self.__update_uptime()
+                mydata = temps + "\n" + mems + "\n" + disks + "\n" + uptime + '\n'
                 self.__post_data(mydata)
                 # Make sure we don't have too many web timeouts in a row
                 # to work around a connect but with micropython

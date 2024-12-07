@@ -14,7 +14,7 @@ except: print("Can't import socket")
 try: from time import sleep
 except: print("Can't import time")
 
-try: from machine import ADC, Pin, Timer, freq, reset
+try: from machine import ADC, Pin, Timer, freq, reset, mem32
 except: print("Can't import machine")
 
 
@@ -42,8 +42,12 @@ class picoSysmon:
         self.PSK = psk
         self.INFLUXURL = url
         self.HOSTNAME = hostname
-        self.debug = debug
         self.wlan = network.WLAN(network.STA_IF)
+
+        # Always debug when the USB serial console is detected
+        if self.__usbDetect():
+            print("Console debugging detected and enabled")
+            self.debug = 1
 
         if re.search(r"\{MAC\}", hostname):
             MAC = self.wlan.config('mac').hex(":")
@@ -82,6 +86,18 @@ class picoSysmon:
 #        gc.enable()
 #        if self.debug: print(f"gc threshold: {gcthresh}  (-1 is disabled)")
 
+
+
+    def __usbDetect(self):
+        SIE_STATUS_REG = 0x50110000 + 0x50
+        SIE_CONNECTED  = 1 << 16
+        SIE_SUSPENDED  = 1 << 4
+        usbConnected   = (mem32[SIE_STATUS_REG] & (SIE_CONNECTED | SIE_SUSPENDED))
+        if usbConnected == 0:
+            # no usb detected
+            return(False)
+        else:
+            return(True)
 
 
     def __blinken(self,timer):
@@ -208,7 +224,11 @@ class picoSysmon:
                 self.blink.deinit()
 
         except KeyboardInterrupt:
-        #    reset()
-            print("I'm halting for you...")
-            return(0)
+            if (self.__usbDetect()):
+                # This should quit back to Thonny
+                print("I'm halting for you...")
+                exit(0)
+            else:
+                # This shouldn't occur, but just returns back to main()
+                return(0)
 

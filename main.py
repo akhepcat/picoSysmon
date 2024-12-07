@@ -7,7 +7,7 @@ except:
     exit(1)
 
 try:
-    from picoSysmon.picoSysmon import  picoSysmon
+    from picoSysmon.picoSysmon import picoSysmon
 except:
     print("Can't import module picoSysmon")
     exit(1)

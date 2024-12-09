@@ -43,7 +43,8 @@ class picoSysmon:
         self.INFLUXURL = url
         self.HOSTNAME = hostname
         self.wlan = network.WLAN(network.STA_IF)
-        self.startup = mktime(gmtime())
+        self.startup = self.__now()
+        self.debug = 0
 
         # Always debug when the USB serial console is detected
         if self.__usbDetect():
@@ -83,16 +84,28 @@ class picoSysmon:
         self.blink = Timer()
 
 
+    def __now(self):
+        return( mktime(gmtime()) )
+
+    def __lprint(self, line: str):
+        print(str(self.__now()) + ': ' + line)
+        lfile = open("logfile.txt", "a")
+        lfile.write(str(self.__now()) + ': ' + line + '\n')
+        lfile.flush()
+        lfile.close()
+
+
     def __usbDetect(self):
         SIE_STATUS_REG = 0x50110000 + 0x50
         SIE_CONNECTED  = 1 << 16
         SIE_SUSPENDED  = 1 << 4
         usbConnected   = (mem32[SIE_STATUS_REG] & (SIE_CONNECTED | SIE_SUSPENDED))
-        if usbConnected == 0:
+        # self.__lprint(f"usbConnected = {usbConnected}")
+        if usbConnected > 0 and usbConnected <= 16:
+            return(True)
+        else:
             # no usb detected
             return(False)
-        else:
-            return(True)
 
 
     def __blinken(self,timer):
@@ -183,7 +196,7 @@ class picoSysmon:
 
     def __update_uptime(self):
         if self.debug: print("updating uptime info")
-        self.uptime = mktime( gmtime() ) - self.startup
+        self.uptime = self.__now() - self.startup
         if self.debug: print(f"uptime: {self.uptime} seconds")
         data = f"system,host={self.HOSTNAME} uptime={self.uptime}"
         return(data)

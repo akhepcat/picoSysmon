@@ -10,6 +10,8 @@ try: import requests
 except: print("Can't import requests")
 try: import socket
 except: print("Can't import socket")
+try: from BME680 import bme680
+except: print("Can't import bme680")
 
 try: from time import sleep, mktime, gmtime
 except: print("Can't import time")
@@ -199,6 +201,23 @@ class picoSysmon:
         self.uptime = self.__now() - self.startup
         if self.debug: print(f"uptime: {self.uptime} seconds")
         data = f"system,host={self.HOSTNAME} uptime={self.uptime}"
+        return(data)
+
+
+    def __update_sensors(self):
+        if self.debug: print("updating sensor info")
+        bme = BME680_I2C( I2C(id=0, scl=Pin(21), sda=Pin(20) ) )
+
+        for _ in range(3):
+            temp=bme.temperature
+            humid=bme.humidity
+            psi=bme.pressure
+            co2=bme.gas
+            time.sleep(1)
+
+        if self.debug: print(f"temp: {temp}  humidity: {humid}  psi: {psi}  co2: {co2}")
+        data = f"environmental,host={self.HOSTNAME} temp=${temp}\n" + f"environmental,host={self.HOSTNAME} humid=${humid}\n" + f"environmental,host={self.HOSTNAME} co2ppm=${co2}\n" + f"environmental,host={self.HOSTNAME} press=${press}"
+
         return(data)
 
 

@@ -1,0 +1,3 @@
+[submodule "BME680"]
+	path = BME680
+	url = https://github.com/robert-hh/BME680-Micropython

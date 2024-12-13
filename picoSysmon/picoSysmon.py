@@ -1,23 +1,21 @@
-try: import gc
-except: print("Can't import gc")
-try: import os
-except: print("Can't import os")
+# Python Standard
+import gc
+import os
+import re
+import requests
+import socket
+from sys import exit
+from time import sleep, mktime, gmtime
+
+# MicroPython specific
 try: import network
 except: print("Can't import network")
-try: import re
-except: print("Can't import re")
-try: import requests
-except: print("Can't import requests")
-try: import socket
-except: print("Can't import socket")
-try: from BME680 import bme680
-except: print("Can't import bme680")
-
-try: from time import sleep, mktime, gmtime
-except: print("Can't import time")
-
 try: from machine import ADC, Pin, Timer, freq, reset, mem32, I2C
 except: print("Can't import machine")
+
+# Other libraries
+try: from BME680 import bme680
+except: print("Can't import bme680")
 
 
 class picoSysmon:
@@ -37,7 +35,7 @@ class picoSysmon:
                 country: str, 
                 url: str, 
                 token: str, 
-                hostname: str
+                hostname: str,
                 bmesda: int,
                 bmescl: int
                 ) -> None:
@@ -51,11 +49,11 @@ class picoSysmon:
         self.debug = 0
         if (int(bmesda)):
             self.bmesda = int(bmesda)
-        else
+        else:
             self.bmesda = 0
         if (bmescl):
             self.bmescl = int(bmescl)
-        else
+        else:
             self.bmescl = 0
 
         # Always debug when the USB serial console is detected

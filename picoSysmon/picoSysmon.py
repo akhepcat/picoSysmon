@@ -98,12 +98,13 @@ class picoSysmon:
 
 
     def __usbDetect(self):
-        SIE_STATUS_REG = 0x50110000 + 0x50
+        USBCTRL_REGS_BASE = 0x50110000
+        SIE_STATUS_REG = USBCTRL_REGS_BASE + 0x50
         SIE_CONNECTED  = 1 << 16
         SIE_SUSPENDED  = 1 << 4
         usbConnected   = (mem32[SIE_STATUS_REG] & (SIE_CONNECTED | SIE_SUSPENDED))
         # self.__lprint(f"usbConnected = {usbConnected}")
-        if usbConnected > 0 and usbConnected <= 16:
+        if ((usbConnected | SIE_CONNECTED) == SIE_CONNECTED ) or ((usbConnected | SIE_SUSPENDED) == SIE_SUSPENDED):
             return(True)
         else:
             # no usb detected

@@ -16,7 +16,7 @@ except: print("Can't import bme680")
 try: from time import sleep, mktime, gmtime
 except: print("Can't import time")
 
-try: from machine import ADC, Pin, Timer, freq, reset, mem32
+try: from machine import ADC, Pin, Timer, freq, reset, mem32, I2C
 except: print("Can't import machine")
 
 
@@ -207,18 +207,23 @@ class picoSysmon:
 
     def __update_sensors(self):
         if self.debug: print("updating sensor info")
-        bme = BME680_I2C( I2C(id=0, scl=Pin(21), sda=Pin(20) ) )
+        bme = bme680.BME680_I2C( I2C(id=0, scl=Pin(21), sda=Pin(20) ) )
 
-        for _ in range(3):
+        for _ in range(3):              # take 3 measurements for stability, and use the last one
             temp=bme.temperature
             humid=bme.humidity
-            psi=bme.pressure
-            co2=bme.gas
-            time.sleep(1)
+            press=bme.pressure
+            voc=bme.gas
+            sleep(1)
 
-        if self.debug: print(f"temp: {temp}  humidity: {humid}  psi: {psi}  co2: {co2}")
-        data = f"environmental,host={self.HOSTNAME} temp=${temp}\n" + f"environmental,host={self.HOSTNAME} humid=${humid}\n" + f"environmental,host={self.HOSTNAME} co2ppm=${co2}\n" + f"environmental,host={self.HOSTNAME} press=${press}"
+        # roll these to 2 decimal places
+        temp = round((temp / 5 * 9) + 32, 2)  # Convert to Fahrenheit
+        humid = round(humid, 2)               # percent
+        press = round(press, 2)               # hPa
+        voc = round(voc, 2)                   # inverse VOC concentration of ethanol, CO, etc.: high resistance=low concentration
 
+        if self.debug: print(f"temp: {temp}  humidity: {humid}  press: {press}  voc: {voc}")
+        data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} voc={voc}\n" + f"environmental,host={self.HOSTNAME} press={press}"
         return(data)
 
 
@@ -237,15 +242,15 @@ class picoSysmon:
                 temps = self.__update_temp()
                 mems = self.__update_mem()
                 disks = self.__update_disk()
-                mydata = temps + "\n" + mems + "\n" + disks + "\n"
                 uptime = self.__update_uptime()
-                mydata = temps + "\n" + mems + "\n" + disks + "\n" + uptime + '\n'
+                sensors = self.__update_sensors()
+                mydata = temps + "\n" + mems + "\n" + disks + "\n" + uptime + '\n' + sensors + '\n'
                 self.__post_data(mydata)
                 # Make sure we don't have too many web timeouts in a row
                 # to work around a connect but with micropython
                 if self.webtimeouts > 3:
                     reset()
-                sleep(2)		# might as well rest a bit here, too
+                sleep(2)    # might as well rest a bit here, too
                 self.blink.deinit()
 
                 # Kill the wifi, then sleep between loops

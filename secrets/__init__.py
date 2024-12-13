@@ -1,6 +1,6 @@
 """ this init contains validation for the secrets are in CONFIG.py """
 import os
-import importlib.util
+import sys
 
 from . import CONFIG
 
@@ -9,20 +9,21 @@ __all__ = [
     '',
 ]
 
-lconfig = "CONFIG_local.py"
+lconfig = "CONFIG_local"
 
 # Get the directory of this package
-package_dir = os.path.dirname(os.path.abspath(__file__))
-overrides = os.path.join(package_dir, lconfig)
+package_dir = __name__.rsplit('.', 1)[0]
+overrides = f"{package_dir}.{lconfig}"
 
 # Check for and dynamically load variables_local.py
-if os.path.exists(overrides):
-    spec = importlib.util.spec_from_file_location(lconfig.replace(".py", ""), overrides)
-    lvars = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(lvars)
+try:
+    lvars = __import__(overrides)
 
     # Override variables in the variables module
-    for key, value in vars(lvars).items():
+    for key in dir(lvars):
         if not key.startswith("_"):
-            setattr(variables, key, value)
+            setattr(CONFIG, key, getattr(lvars, key))
 
+except ImportError:
+    # If variables_local.py does not exist, do nothing
+    pass

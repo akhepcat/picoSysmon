@@ -1,9 +1,16 @@
 #!/bin/python3
 from sys import exit
+
 try:
-    import secrets.CONFIG as CONFIG
+    from BME680 import bme680
 except:
-    print("Can't import module secrets.CONFIG")
+    print("Can't import module bme680")
+    pass
+
+try:
+    from secrets import CONFIG
+except:
+    print("Can't import CONFIG")
     exit(1)
 
 try:

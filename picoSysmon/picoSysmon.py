@@ -38,6 +38,8 @@ class picoSysmon:
                 url: str, 
                 token: str, 
                 hostname: str
+                bmesda: int,
+                bmescl: int
                 ) -> None:
         # Set self vars from main first
         self.SSID = ssid
@@ -47,6 +49,14 @@ class picoSysmon:
         self.wlan = network.WLAN(network.STA_IF)
         self.startup = self.__now()
         self.debug = 0
+        if (int(bmesda)):
+            self.bmesda = int(bmesda)
+        else
+            self.bmesda = 0
+        if (bmescl):
+            self.bmescl = int(bmescl)
+        else
+            self.bmescl = 0
 
         # Always debug when the USB serial console is detected
         if self.__usbDetect():
@@ -206,25 +216,28 @@ class picoSysmon:
 
 
     def __update_sensors(self):
-        if self.debug: print("updating sensor info")
-        bme = bme680.BME680_I2C( I2C(id=0, scl=Pin(21), sda=Pin(20) ) )
+        if (self.bmesda > 0):
+            if self.debug: print("updating sensor info")
+            bme = bme680.BME680_I2C( I2C(id=0, scl=Pin(self.bmescl), sda=Pin(self.bmesda) ) )
 
-        for _ in range(3):              # take 3 measurements for stability, and use the last one
-            temp=bme.temperature
-            humid=bme.humidity
-            press=bme.pressure
-            voc=bme.gas
-            sleep(1)
+            for _ in range(3):              # take 3 measurements for stability, and use the last one
+                temp=bme.temperature
+                humid=bme.humidity
+                press=bme.pressure
+                voc=bme.gas
+                sleep(1)
 
-        # roll these to 2 decimal places
-        temp = round((temp / 5 * 9) + 32, 2)  # Convert to Fahrenheit
-        humid = round(humid, 2)               # percent
-        press = round(press, 2)               # hPa
-        voc = round(voc, 2)                   # inverse VOC concentration of ethanol, CO, etc.: high resistance=low concentration
+            # roll these to 2 decimal places
+            temp = round((temp / 5 * 9) + 32, 2)  # Convert to Fahrenheit
+            humid = round(humid, 2)               # percent
+            press = round(press, 2)               # hPa
+            voc = round(voc, 2)                   # inverse VOC concentration of ethanol, CO, etc.: high resistance=low concentration
 
-        if self.debug: print(f"temp: {temp}  humidity: {humid}  press: {press}  voc: {voc}")
-        data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} voc={voc}\n" + f"environmental,host={self.HOSTNAME} press={press}"
-        return(data)
+            if self.debug: print(f"temp: {temp}  humidity: {humid}  press: {press}  voc: {voc}")
+            data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} voc={voc}\n" + f"environmental,host={self.HOSTNAME} press={press}"
+            return(data)
+        else:
+            return("")
 
 
     def run(self):
@@ -244,7 +257,9 @@ class picoSysmon:
                 disks = self.__update_disk()
                 uptime = self.__update_uptime()
                 sensors = self.__update_sensors()
-                mydata = temps + "\n" + mems + "\n" + disks + "\n" + uptime + '\n' + sensors + '\n'
+                mydata = temps + "\n" + mems + "\n" + disks + "\n" + uptime + '\n'
+                if (self.bmesda > 0 ):
+                    mydata = mydata + sensors + '\n'
                 self.__post_data(mydata)
                 # Make sure we don't have too many web timeouts in a row
                 # to work around a connect but with micropython

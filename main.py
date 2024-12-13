@@ -40,7 +40,7 @@ if __name__  == "__main__":
         print("WARN: HOSTNAME not defined in secrets.CONFIG, using default 'pico2w'")
         CONFIG.HOSTNAME = "pico2w"
 
-    sysmon = picoSysmon(CONFIG.DEBUG, CONFIG.SSID, CONFIG.PSK, CONFIG.COUNTRY, CONFIG.INFLUXURL, CONFIG.TOKEN, CONFIG.HOSTNAME)
+    sysmon = picoSysmon(CONFIG.DEBUG, CONFIG.SSID, CONFIG.PSK, CONFIG.COUNTRY, CONFIG.INFLUXURL, CONFIG.TOKEN, CONFIG.HOSTNAME, CONFIG.BME680_SDA, CONFIG.BME680_SCL)
     sysmon.run()
     exit(0)
 

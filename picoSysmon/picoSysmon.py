@@ -65,7 +65,7 @@ class picoSysmon:
             MAC = self.wlan.config('mac').hex(":")
             MAC = MAC.replace(":","")
             MAC = MAC[6:]
-            print(f"updating hostname with mac: {MAC}")
+            if self.debug: print(f"updating hostname with mac: {MAC}")
             self.HOSTNAME = self.HOSTNAME.replace("{MAC}", MAC)
 
         if (token is None) or (token == ""):
@@ -133,7 +133,7 @@ class picoSysmon:
             while sleeps < 5:
                 if self.wlan.isconnected() == True:
                     self.ip = self.wlan.ifconfig()[0]
-                    print(f'Connected on {self.ip}')
+                    if self.debug: print(f'Connected on {self.ip}')
                     return self.wlan
                 sleeps += 1
                 sleep(1)
@@ -152,7 +152,7 @@ class picoSysmon:
             response = requests.post(self.INFLUXURL, headers=self.headers, data=data, timeout=5)
         except:
             self.webtimeouts += 1
-            print(f"timeout #{self.webtimeouts} sending data to influxdb")
+            if self.debug: print(f"timeout #{self.webtimeouts} sending data to influxdb")
             return(False)
         if response.status_code == 204:
             if self.debug: print("Data posted successfully")
@@ -160,8 +160,8 @@ class picoSysmon:
             self.webtimeouts = 0
             ret = True
         else:
-            print("Failed to post data:")
             if self.debug:
+                print("Failed to post data:")
                 print("Status Code:", response.status_code)
                 print("Response:", response.text)
             ret = False
@@ -245,7 +245,7 @@ class picoSysmon:
                 self.blink.init(freq=25, mode=Timer.PERIODIC, callback=self.__blinken)    # freq is events per second
                 if self.debug: print("Connecting to wifi")
                 self.__connect()
-                sleep(2)		# let things stabilize
+                sleep(2)     # let things stabilize
                 self.blink.deinit()
 
                 # Update influxDB

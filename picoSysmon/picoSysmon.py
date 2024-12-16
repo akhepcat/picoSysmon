@@ -46,6 +46,8 @@ class picoSysmon:
         self.HOSTNAME = hostname
         self.wlan = network.WLAN(network.STA_IF)
         self.startup = self.__now()
+        self.tempcache = 0
+        self.prescache = 0
         self.debug = 0
         if (int(bmesda)):
             self.bmesda = int(bmesda)
@@ -216,8 +218,18 @@ class picoSysmon:
     def __update_sensors(self):
         if (self.bmesda > 0):
             if self.debug: print("updating sensor info")
-            bme = bme680.BME680_I2C( I2C(id=0, scl=Pin(self.bmescl), sda=Pin(self.bmesda) ) )
+            try:
+                bme = bme680.BME680_I2C( I2C(id=0, scl=Pin(self.bmescl), sda=Pin(self.bmesda) ), debug=False )
+            except:
+                return("")
 
+            if bme.detected is False:
+                return("")
+
+#            temp = bme.temperature
+#            if temp is None:
+#                if self.debug: print("BME680: oh, we got none temp value")
+#                return("")
             for _ in range(3):              # take 3 measurements for stability, and use the last one
                 temp=bme.temperature
                 humid=bme.humidity
@@ -231,6 +243,8 @@ class picoSysmon:
             press = round(press, 2)               # hPa
             voc = round(voc, 2)                   # inverse VOC concentration of ethanol, CO, etc.: high resistance=low concentration
 
+            if press < 630:    # this would be lower than "human comfortable" but if you're putting this on a high-altitude baloon, it might be too high
+                if self.debug: print(f"press returned invalid: {press}")
             if self.debug: print(f"temp: {temp}  humidity: {humid}  press: {press}  voc: {voc}")
             data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} voc={voc}\n" + f"environmental,host={self.HOSTNAME} press={press}"
             return(data)

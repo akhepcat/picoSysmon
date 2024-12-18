@@ -37,7 +37,8 @@ class picoSysmon:
                 token: str, 
                 hostname: str,
                 bmesda: int,
-                bmescl: int
+                bmescl: int,
+                logfile: str
                 ) -> None:
         # Set self vars from main first
         self.SSID = ssid
@@ -49,6 +50,7 @@ class picoSysmon:
         self.tempcache = 0
         self.prescache = 0
         self.debug = debug
+        self._logfile = logfile
         if (int(bmesda)):
             self.bmesda = int(bmesda)
         else:
@@ -102,10 +104,11 @@ class picoSysmon:
     def __logprt(self, line: str):
         if self.debug:
             print(str(self.__now()) + ': ' + line)
-        lfile = open("logfile.txt", "a")
-        lfile.write(str(self.__now()) + ': ' + line + '\n')
-        lfile.flush()
-        lfile.close()
+        if self._logfile:
+            lfile = open(self._logfile, "a")
+            lfile.write(str(self.__now()) + ': ' + line + '\n')
+            lfile.flush()
+            lfile.close()
 
 
     def __usbDetect(self):

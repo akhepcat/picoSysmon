@@ -12,3 +12,4 @@ BME680_SCL = 0      # gpio pin number for BME680 clock; 0 disables
 
 # This prints a lot of debugging info to the console if true
 DEBUG = True
+LOGFILE = None    # or like "/mylogfile.txt" to write to the nvram

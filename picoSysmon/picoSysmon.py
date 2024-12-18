@@ -217,6 +217,7 @@ class picoSysmon:
 
 
     def __update_sensors(self):
+        minpress = 630    # set this for your minimum expected, with a margin
         if (self.bmesda > 0):
             self.__logprt("updating sensor info")
             try:
@@ -244,7 +245,7 @@ class picoSysmon:
             press = round(press, 2)               # hPa
             voc = round(voc, 2)                   # inverse VOC concentration of ethanol, CO, etc.: high resistance=low concentration
 
-            if press < 630:    # this would be lower than "human comfortable" but if you're putting this on a high-altitude baloon, it might be too high
+            if press < minpress:    # this would be lower than "human comfortable" but if you're putting this on a high-altitude baloon, it might be too high
                 self.__logprt(f"press returned invalid: {press}")
             self.__logprt(f"temp: {temp}  humidity: {humid}  press: {press}  voc: {voc}")
             data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} voc={voc}\n" + f"environmental,host={self.HOSTNAME} press={press}"

@@ -248,7 +248,7 @@ class picoSysmon:
             if press < minpress:    # this would be lower than "human comfortable" but if you're putting this on a high-altitude baloon, it might be too high
                 self.__logprt(f"press returned invalid: {press}")
             self.__logprt(f"temp: {temp}  humidity: {humid}  press: {press}  voc: {voc}")
-            data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} voc={voc}\n" + f"environmental,host={self.HOSTNAME} press={press}"
+            data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} voc={voc}\n" + f"environmental,host={self.HOSTNAME} press={press}\n"
             return(data)
         else:
             return("")

@@ -5,12 +5,13 @@ a subproject of the System-Monitor project, specifically for Pi Pico devices
 This project contains submodules!
 
 You can either:
-$ git clone --recurse-submodules https://github.com/akhepcat/picoSysmon
+
+    $ git clone --recurse-submodules https://github.com/akhepcat/picoSysmon
 
 or
 
-$ git clone https://github.com/akhepcat/picoSysmon
-$ git submodule update --init --recursive
+    $ git clone https://github.com/akhepcat/picoSysmon
+    $ git submodule update --init --recursive
 
 
 Now that you've got the repo cloned, you'll need to create a local config

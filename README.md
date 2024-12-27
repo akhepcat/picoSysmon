@@ -28,3 +28,9 @@ You can always plug it back into your computer for debugging.
 
 Otherwise, throw it somewhere with USB-micro delivered 5v power, and enjoy
 your remote sensor!
+
+*** Support Sensors
+
+- Raspberry PI Pico onboard temperature
+- BME 680 temperature, humidity, pressure, volatile gas
+

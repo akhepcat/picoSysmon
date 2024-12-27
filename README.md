@@ -1,7 +1,10 @@
 # picoSysmon
+
+## About
 a subproject of the System-Monitor project, specifically for Pi Pico devices
 - currently tested on Pi Pico 2W
 
+## Installation
 This project contains submodules!
 
 You can either:
@@ -30,8 +33,12 @@ You can always plug it back into your computer for debugging.
 Otherwise, throw it somewhere with USB-micro delivered 5v power, and enjoy
 your remote sensor!
 
-*** Support Sensors
+## Supported Sensors
 
 - Raspberry PI Pico onboard temperature
 - BME 680 temperature, humidity, pressure, volatile gas
 
+## Future Work
+
+- Add additional sensors
+- ??? profit ???

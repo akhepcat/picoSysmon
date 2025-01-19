@@ -10,6 +10,8 @@ HOSTNAME = "mypico2w-{MAC}"   # regular hostname, or template with the mac addre
 BME680_SDA = 0      # gpio pin number for BME680 data;  0 disables
 BME680_SCL = 0      # gpio pin number for BME680 clock; 0 disables
 
+PLANTS = False     # True if you have a MonkMakes Plant monitor, false otherwise
+
 # This prints a lot of debugging info to the console if true
 DEBUG = True
 LOGFILE = None    # or like "/mylogfile.txt" to write to the nvram

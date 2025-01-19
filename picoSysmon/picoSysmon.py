@@ -14,8 +14,17 @@ try: from machine import ADC, Pin, Timer, freq, reset, mem32, I2C
 except: print("Can't import machine")
 
 # Other libraries
-try: from BME680 import bme680
-except: print("Can't import bme680")
+try:
+    from BME680 import bme680
+except:
+    print("Can't import bme680")
+    pass
+
+try: 
+    from pmon.pmon import PlantMonitor
+except:
+    print("Can't import modules PlantMonitor from pmon")
+    pass
 
 
 class picoSysmon:
@@ -38,6 +47,7 @@ class picoSysmon:
                 hostname: str,
                 bmesda: int,
                 bmescl: int,
+                plants: bool,
                 logfile: str
                 ) -> None:
         # Set self vars from main first
@@ -51,6 +61,7 @@ class picoSysmon:
         self.prescache = 0
         self.debug = debug
         self._logfile = logfile
+        self.plants = plants
         if (int(bmesda)):
             self.bmesda = int(bmesda)
         else:
@@ -215,6 +226,23 @@ class picoSysmon:
         data = f"system,host={self.HOSTNAME} uptime={self.uptime}"
         return(data)
 
+    def __update_plants(self):
+        pm = PlantMonitor()
+        pm.led_on()
+        sleep(1)                # sleep between reads to get consistant data
+        temp = pm.get_temp()
+        sleep(1)
+        wet =  pm.get_wetness()
+        sleep(1)
+        humid = pm.get_humidity()
+
+        temp = round((temp / 5 * 9) + 32, 2)  # Convert to Fahrenheit
+        humid = round(humid, 2)               # percent
+        wet = round(wet, 2)                   # what's this scale, anyway?
+        self.__logprt(f"Wetness: {0} Temp: {1} Humidity: {2}".format(wet, temp, humid))
+        data = f"environmental,host={self.HOSTNAME} temp={temp}\n" + f"environmental,host={self.HOSTNAME} humid={humid}\n" + f"environmental,host={self.HOSTNAME} wetness={wet}\n"
+        pm.led_off()
+        return(data)
 
     def __update_sensors(self):
         minpress = 630    # set this for your minimum expected, with a margin
@@ -270,10 +298,16 @@ class picoSysmon:
                 mems = self.__update_mem()
                 disks = self.__update_disk()
                 uptime = self.__update_uptime()
-                sensors = self.__update_sensors()
                 mydata = temps + "\n" + mems + "\n" + disks + "\n" + uptime + '\n'
+
                 if (self.bmesda > 0 ):
+                    sensors = self.__update_sensors()
                     mydata = mydata + sensors + '\n'
+
+                if self.plants:
+                    plants = self.__update_plants()
+                    mydata = mydata + plants + '\n'
+
                 self.__post_data(mydata)
                 # Make sure we don't have too many web timeouts in a row
                 # to work around a connect but with micropython
@@ -286,14 +320,15 @@ class picoSysmon:
                 self.__logprt("Deactivating wifi")
                 self.wlan.disconnect()
                 self.wlan.active(False)
-                self.blink.init(freq=1, mode=Timer.PERIODIC, callback=self.__blinken)
+                # self.blink.init(freq=1, mode=Timer.PERIODIC, callback=self.__blinken)		# don't blink in deepsleep
                 sleeps = ( 60 * 5 )
                 if self.debug:
                     sleeps = 60
-                self.__logprt(f"sleeping for {sleeps} seconds")
                 gc.collect()
-                sleep(sleeps)
-                self.blink.deinit()
+                self.__logprt(f"sleeping for {sleeps} seconds")
+                sleep(sleeps)   #deepsleep is milliseconds, sleep is seconds, but deepsleep doesn't wake us up so stay with sleep for now
+                self.__logprt(f"Waking up...")
+                # self.blink.deinit()
 
         except KeyboardInterrupt:
             if (self.__usbDetect()):

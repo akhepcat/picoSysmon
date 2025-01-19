@@ -1,3 +1,6 @@
 [submodule "BME680"]
 	path = BME680
 	url = https://github.com/akhepcat/BME680-Micropython.git
+[submodule "pmon"]
+	path = pmon
+	url = https://github.com/monkmakes/pmon.git

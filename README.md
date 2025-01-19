@@ -37,6 +37,7 @@ your remote sensor!
 
 - Raspberry PI Pico onboard temperature
 - BME 680 temperature, humidity, pressure, volatile gas
+- Monk Makes Plant Monitor
 
 ## Future Work
 

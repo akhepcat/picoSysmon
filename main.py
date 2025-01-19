@@ -7,6 +7,12 @@ except:
     print("Can't import module bme680")
     pass
 
+try: 
+    from pmon.pmon import PlantMonitor
+except:
+    print("Can't import modules PlantMonitor from pmon")
+    pass
+
 try:
     from secrets import CONFIG
 except:
@@ -40,6 +46,6 @@ if __name__  == "__main__":
         print("WARN: HOSTNAME not defined in secrets.CONFIG, using default 'pico2w'")
         CONFIG.HOSTNAME = "pico2w"
 
-    sysmon = picoSysmon(CONFIG.DEBUG, CONFIG.SSID, CONFIG.PSK, CONFIG.COUNTRY, CONFIG.INFLUXURL, CONFIG.TOKEN, CONFIG.HOSTNAME, CONFIG.BME680_SDA, CONFIG.BME680_SCL, CONFIG.LOGFILE )
+    sysmon = picoSysmon(CONFIG.DEBUG, CONFIG.SSID, CONFIG.PSK, CONFIG.COUNTRY, CONFIG.INFLUXURL, CONFIG.TOKEN, CONFIG.HOSTNAME, CONFIG.BME680_SDA, CONFIG.BME680_SCL, CONFIG.PLANTS, CONFIG.LOGFILE )
     sysmon.run()
     exit(0)

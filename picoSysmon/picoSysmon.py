@@ -72,26 +72,29 @@ class picoSysmon:
         self.prescache = 0
         self.debug = debug
         self._logfile = logfile
+
+        self.__logprt(f"Module PlantMon: {('dis', 'en')[bool(plants)]}abled")
         self.plants = plants
-        if (int(bmesda)):
+
+        if (int(bmesda) and int(bmescl)):
             self.bmesda = int(bmesda)
+            self.bmescl = int(bmescl)
             self.bmebus = int(bmebus)
+            self.__logprt(f"Module BME680: enabled")
         else:
             self.bmesda = 0
-        if (bmescl):
-            self.bmescl = int(bmescl)
-        else:
             self.bmescl = 0
+            self.__logprt(f"Module BME680: disabled")
 
-        if (int(mcpsda)):
+        if (int(mcpsda) and int(mcpscl)):
             self.mcpsda = int(mcpsda)
+            self.mcpscl = int(mcpscl)
             self.mcpbus = int(mcpbus)
+            self.__logprt(f"Module MCP9808: enabled")
         else:
             self.mcpsda = 0
-        if (mcpscl):
-            self.mcpscl = int(mcpscl)
-        else:
             self.mcpscl = 0
+            self.__logprt(f"Module MCP9808: disabled")
 
         # Always debug when the USB serial console is detected (this is not quite working)
 #        if self.__usbDetect():
@@ -187,12 +190,16 @@ class picoSysmon:
 
     def __post_data(self, data):
         self.__logprt(f"posting data to influxdb...\n{data}")
-        try:
-            response = requests.post(self.INFLUXURL, headers=self.headers, data=data, timeout=5)
-        except:
-            self.webtimeouts += 1
-            self.__logprt(f"timeout #{self.webtimeouts} sending data to influxdb")
-            return(False)
+        for attempt in range(3):
+            try:
+                response = requests.post(self.INFLUXURL, headers=self.headers, data=data, timeout=10)
+                self.__logprt(f"Attempted post: http status Code is {response.status_code}")
+                break
+            except Exception:
+                self.webtimeouts += 1
+                self.__logprt(f"timeout #{self.webtimeouts} sending data to influxdb")
+                sleep(1)
+
         if response.status_code == 204:
             self.__logprt("Data posted successfully")
             # assume that a success resets things
@@ -200,7 +207,8 @@ class picoSysmon:
             ret = True
         else:
             self.__logprt(f"Failed to post data! http status Code is {response.status_code}")
-            self.__logprt("Response text was:\n{response.text}")
+            self.__logprt(f"we tried {self.webtimeouts} times to post it")
+            self.__logprt("Last response text was:\n{response.text}")
             ret = False
         response.close()
         return(ret)
@@ -270,10 +278,11 @@ class picoSysmon:
     def __update_bme680(self):
         minpress = 630    # set this for your minimum expected, with a margin
         if (self.bmesda > 0):
-            self.__logprt("updating sensor info")
+            self.__logprt("Sensors: updating from BME680")
             try:
                 bme = bme680.BME680_I2C( I2C(id=self.bmebus, scl=Pin(self.bmescl), sda=Pin(self.bmesda) ), debug=False )
             except:
+                self.__logprt("Unable to initialize MCP9808")
                 return("")
 
             if bme.detected is False:
@@ -308,24 +317,29 @@ class picoSysmon:
 
     def __update_mcp9808(self):
         if (self.mcpsda > 0):
-            self.__logprt("updating sensor info")
+            self.__logprt("Sensors: updating from MCP9808")
             try:
-                mcp = mcp9809.MCP9808( I2C(id=self.mcpbus, scl=Pin(self.mcpscl), sda=Pin(self.mcpsda) ) )
+                self.__logprt(f"Module init: MCP9808(I2C(id={self.mcpbus}, scl=Pin({self.mcpscl}), sda=Pin({self.mcpsda}))")
+                mcp = mcp9808.MCP9808( I2C(id=self.mcpbus, scl=Pin(self.mcpscl), sda=Pin(self.mcpsda) ) )
             except:
+                self.__logprt("Unable to initialize MCP9808")
                 return("")
 
-            if mcp.detected is False:
+            if mcp is False:
                 self.__logprt("mcp9808 configured but not detected")
                 return("")
 
             for _ in range(3):              # take 3 measurements for stability, and use the last one
-                temp=mcp.get_temp_int
+                temp=mcp.get_temp()
                 sleep(.5)
 
             # roll these to 2 decimal places
+            self.__logprt(f"mcp9808 returned temp {temp}C")
             temp = round((temp / 5 * 9) + 32, 2)  # Convert to Fahrenheit
 
-            self.__logprt(f"temp: {temp}")
+            self.__logprt(f"temp: {temp}F")
+
+            mcp.set_shutdown_mode()
             data = f"environmental,host={self.HOSTNAME} temp={temp}\n"
             return(data)
         else:

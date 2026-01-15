@@ -4,3 +4,6 @@
 [submodule "pmon"]
 	path = pmon
 	url = https://github.com/monkmakes/pmon.git
+[submodule "mcp9808"]
+	path = mcp9808
+	url = https://github.com/kfricke/micropython-mcp9808

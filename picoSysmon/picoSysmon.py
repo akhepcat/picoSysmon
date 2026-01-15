@@ -20,6 +20,12 @@ except:
     print("Can't import bme680")
     pass
 
+try:
+    from mcp9808 import mcp9808
+except:
+    print("Can't import mcp9808")
+    pass
+
 try: 
     from pmon.pmon import PlantMonitor
 except:
@@ -33,6 +39,7 @@ class picoSysmon:
         picoSysmon is a tiny implementation of the sysmon project to monitor server data
 
         It currently supports CPU temp, storage space, and memory use.
+        External modules include bme680, mcp9808, and 'plantmonitor'
 
         Other trackable items may appear in the future
      """
@@ -47,6 +54,8 @@ class picoSysmon:
                 hostname: str,
                 bmesda: int,
                 bmescl: int,
+                mcpsda: int,
+                mcpscl: int,
                 plants: bool,
                 logfile: str
                 ) -> None:
@@ -70,6 +79,15 @@ class picoSysmon:
             self.bmescl = int(bmescl)
         else:
             self.bmescl = 0
+
+        if (int(mcpsda)):
+            self.mcpsda = int(mcpsda)
+        else:
+            self.mcpsda = 0
+        if (mcpscl):
+            self.mcpscl = int(mcpscl)
+        else:
+            self.mcpscl = 0
 
         # Always debug when the USB serial console is detected (this is not quite working)
 #        if self.__usbDetect():
@@ -128,11 +146,12 @@ class picoSysmon:
         SIE_CONNECTED  = 1 << 16
         SIE_SUSPENDED  = 1 << 4
         usbConnected   = (mem32[SIE_STATUS_REG] & (SIE_CONNECTED | SIE_SUSPENDED))
-        self.__logprt(f"usbConnected = {usbConnected}")
         if ((usbConnected | SIE_CONNECTED) == SIE_CONNECTED ) or ((usbConnected | SIE_SUSPENDED) == SIE_SUSPENDED):
+            self.__logprt(f"usbConnected = {usbConnected} :== true")
             return(True)
         else:
             # no usb detected
+            self.__logprt(f"usbConnected = {usbConnected} :== false")
             return(False)
 
 
@@ -244,7 +263,7 @@ class picoSysmon:
         pm.led_off()
         return(data)
 
-    def __update_sensors(self):
+    def __update_bme680(self):
         minpress = 630    # set this for your minimum expected, with a margin
         if (self.bmesda > 0):
             self.__logprt("updating sensor info")
@@ -254,6 +273,7 @@ class picoSysmon:
                 return("")
 
             if bme.detected is False:
+                self.__logprt("bme680 configured but not detected")
                 return("")
 
 #            temp = bme.temperature
@@ -282,6 +302,32 @@ class picoSysmon:
             return("")
 
 
+    def __update_mcp9808(self):
+        if (self.mcpsda > 0):
+            self.__logprt("updating sensor info")
+            try:
+                mcp = mcp9809.MCP9808( I2C(id=0, scl=Pin(self.mcpscl), sda=Pin(self.mcpsda) ) )
+            except:
+                return("")
+
+            if mcp.detected is False:
+                self.__logprt("mcp9808 configured but not detected")
+                return("")
+
+            for _ in range(3):              # take 3 measurements for stability, and use the last one
+                temp=mcp.get_temp_int
+                sleep(.5)
+
+            # roll these to 2 decimal places
+            temp = round((temp / 5 * 9) + 32, 2)  # Convert to Fahrenheit
+
+            self.__logprt(f"temp: {temp}")
+            data = f"environmental,host={self.HOSTNAME} temp={temp}\n"
+            return(data)
+        else:
+            return("")
+
+
     def run(self):
         try:
             while True:
@@ -300,13 +346,18 @@ class picoSysmon:
                 uptime = self.__update_uptime()
                 mydata = temps + "\n" + mems + "\n" + disks + "\n" + uptime + '\n'
 
+                # Try various external sensors
                 if (self.bmesda > 0 ):
-                    sensors = self.__update_sensors()
+                    sensors = self.__update_bme680()
+                    mydata = mydata + sensors + '\n'
+
+                if (self.mcpsda > 0 ):
+                    sensors = self.__update_mcp9808()
                     mydata = mydata + sensors + '\n'
 
                 if self.plants:
-                    plants = self.__update_plants()
-                    mydata = mydata + plants + '\n'
+                    sensors = self.__update_plants()
+                    mydata = mydata + sensors + '\n'
 
                 self.__post_data(mydata)
                 # Make sure we don't have too many web timeouts in a row

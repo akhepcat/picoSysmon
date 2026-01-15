@@ -54,8 +54,10 @@ class picoSysmon:
                 hostname: str,
                 bmesda: int,
                 bmescl: int,
+                bmebus: int,
                 mcpsda: int,
                 mcpscl: int,
+                mcpbus: int,
                 plants: bool,
                 logfile: str
                 ) -> None:
@@ -73,6 +75,7 @@ class picoSysmon:
         self.plants = plants
         if (int(bmesda)):
             self.bmesda = int(bmesda)
+            self.bmebus = int(bmebus)
         else:
             self.bmesda = 0
         if (bmescl):
@@ -82,6 +85,7 @@ class picoSysmon:
 
         if (int(mcpsda)):
             self.mcpsda = int(mcpsda)
+            self.mcpbus = int(mcpbus)
         else:
             self.mcpsda = 0
         if (mcpscl):
@@ -268,7 +272,7 @@ class picoSysmon:
         if (self.bmesda > 0):
             self.__logprt("updating sensor info")
             try:
-                bme = bme680.BME680_I2C( I2C(id=0, scl=Pin(self.bmescl), sda=Pin(self.bmesda) ), debug=False )
+                bme = bme680.BME680_I2C( I2C(id=self.bmebus, scl=Pin(self.bmescl), sda=Pin(self.bmesda) ), debug=False )
             except:
                 return("")
 
@@ -306,7 +310,7 @@ class picoSysmon:
         if (self.mcpsda > 0):
             self.__logprt("updating sensor info")
             try:
-                mcp = mcp9809.MCP9808( I2C(id=0, scl=Pin(self.mcpscl), sda=Pin(self.mcpsda) ) )
+                mcp = mcp9809.MCP9808( I2C(id=self.mcpbus, scl=Pin(self.mcpscl), sda=Pin(self.mcpsda) ) )
             except:
                 return("")
 

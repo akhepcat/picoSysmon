@@ -329,6 +329,9 @@ class picoSysmon:
                 self.__logprt("mcp9808 configured but not detected")
                 return("")
 
+            # wake up the MCP9808 otherwise the temperature returned is a "cached" version that never updates
+            mcp.set_shutdown_mode(False)
+
             for _ in range(3):              # take 3 measurements for stability, and use the last one
                 temp=mcp.get_temp()
                 sleep(.5)
@@ -339,7 +342,7 @@ class picoSysmon:
 
             self.__logprt(f"temp: {temp}F")
 
-            mcp.set_shutdown_mode()
+            mcp.set_shutdown_mode(True)
             data = f"environmental,host={self.HOSTNAME} temp={temp}\n"
             return(data)
         else:

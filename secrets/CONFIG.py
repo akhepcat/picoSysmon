@@ -9,9 +9,11 @@ HOSTNAME = "mypico2w-{MAC}"   # regular hostname, or template with the mac addre
 
 BME680_SDA = 0      # gpio pin number for BME680 data;  0 disables
 BME680_SCL = 0      # gpio pin number for BME680 clock; 0 disables
+BME680_BUS = 0	    # the i2c bus corresponding to the SDA/SCL pair for your 680
 
-MCP9808_SDA = 0      # gpio pin number for MCP9808 data;  0 disables
-MCP9808_SCL = 0      # gpio pin number for MCP9808 clock; 0 disables
+MCP9808_SDA = 0     # gpio pin number for MCP9808 data;  0 disables
+MCP9808_SCL = 0     # gpio pin number for MCP9808 clock; 0 disables
+MCP9808_BUS = 0     # the i2c bus corresponding to the SDA/SCL pair for your 9808
 
 PLANTS = False     # True if you have a MonkMakes Plant monitor, false otherwise
 
